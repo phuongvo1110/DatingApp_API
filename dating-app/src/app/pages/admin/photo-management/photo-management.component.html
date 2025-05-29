@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th class="p-2" style="width: 30%;">Id</th>
+                <th class="p-2" style="width: 40%;">Photo</th>
+                <th class="p-2" style="width: 30%;">Action</th>
+            </thead>
+            <tbody>
+                @for (photo of photos; track photo.id) {
+                    <tr>
+                        <td>{{photo.id}}</td>
+                        <td><img [src]="photo.url" alt="User Photo" width="150" height="150"></td>
+                        <td>
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-success" (click)="approvePhoto(photo.id)">Approve</button>
+                                <button class="btn btn-danger" (click)="rejectPhoto(photo.id)">Reject</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

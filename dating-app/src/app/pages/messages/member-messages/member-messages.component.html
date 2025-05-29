@@ -1,0 +1,87 @@
+<div class="chat-message">
+    @if (messageService.messageThread().length ===0) {
+    <p class="text-center">No messages yet</p>
+    } @else {
+    <ul class="chat overflow-auto" style="height: 600px; scroll-behavior: smooth;" #scrollMe>
+        @for (message of messageService.messageThread(); track message.id) {
+        @if (message.senderUsername === userName && !message.dateRead) {
+        <li class="left clearfix">
+            <span class="chat-img pull-left">
+                <img [src]="message.senderPhotoUrl || 'assets/user.png'" alt="User Avatar">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{message.senderUsername}}</strong>
+                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> {{message.messageSent |
+                        timeago}} (Unread)</small>
+                </div>
+                <p>
+                    {{message.content}}
+                </p>
+            </div>
+        </li>
+        }
+        @if (message.senderUsername === userName && message.dateRead) {
+        <li class="left clearfix">
+            <span class="chat-img pull-left">
+                <img [src]="message.senderPhotoUrl || 'assets/user.png'" alt="User Avatar">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{message.senderUsername}}</strong>
+                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> {{message.messageSent |
+                        timeago}} (Read)</small>
+                </div>
+                <p>
+                    {{message.content}}
+                </p>
+            </div>
+        </li>
+        }
+        @if (message.senderUsername !== userName && !message.dateRead) {
+        <li class="right clearfix">
+            <span class="chat-img pull-right">
+                <img [src]="message.senderPhotoUrl" alt="User Avatar">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{message.senderUsername}}</strong>
+                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> {{message.messageSent |
+                        timeago}} (Unread)</small>
+                </div>
+                <p>
+                    {{message.content}}
+                </p>
+            </div>
+        </li>
+        }
+        @if (message.senderUsername !== userName && message.dateRead) {
+        <li class="right clearfix">
+            <span class="chat-img pull-right">
+                <img [src]="message.senderPhotoUrl" alt="User Avatar">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{message.senderUsername}}</strong>
+                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> {{message.messageSent |
+                        timeago}} (Read)</small>
+                </div>
+                <p>
+                    {{message.content}}
+                </p>
+            </div>
+        </li>
+        }}
+    </ul>}
+</div>
+<div class="chat-box bg-white">
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()">
+        <div class="input-group">
+            <input required class="form-control border no-shadow no-rounded" name="messageContent"
+                [(ngModel)]="messageContent" placeholder="Type your message here">
+            <span class="input-group-btn">
+                <button [disabled]="!messageForm.valid" class="btn btn-success no-rounded" type="submit">Send</button>
+            </span>
+        </div>
+    </form>
+</div>

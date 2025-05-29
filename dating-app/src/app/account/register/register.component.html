@@ -1,0 +1,32 @@
+<div class="container">
+    <h2 class="text-center text-primary">Sign Up</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="d-flex justify-content-start flex-column">
+        <app-text-input [formControl]="$any(f['userName'])" label="Username"></app-text-input>
+        <app-text-input [formControl]="$any(f['password'])" label="Password" type="password"></app-text-input>
+        <app-text-input [formControl]="$any(f['confirmPassword'])" label="Confirm Password"
+            type="password"></app-text-input>
+        <app-text-input [formControl]="$any(f['knownAs'])" label="Full Name"></app-text-input>
+        <div class="mb-3" style="text-align: left;">
+            <label for="gender" class="form-label">Gender</label>
+            <select formControlName="gender" class="form-select form-select-lg" name="gender" id="gender" required
+                [class.is-invalid]="f['gender'].errors && f['gender'].touched">
+                <option selected>Select one</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select your gender.
+            </div>
+        </div>
+        <app-date-picker label="Date of Birth" [formControl]="$any(f['dateOfBirth'])"></app-date-picker>
+        <app-text-input [formControl]="$any(f['city'])" label="City"></app-text-input>
+        <app-text-input [formControl]="$any(f['country'])" label="Country"></app-text-input>
+        <button type="submit" class="btn btn-primary">
+            Register
+        </button>
+        <button (click)="cancel()" type="button" class="btn btn-danger mt-3">
+            Cancel
+        </button>
+
+    </form>
+</div>

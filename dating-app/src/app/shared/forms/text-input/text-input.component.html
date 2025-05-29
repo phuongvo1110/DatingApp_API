@@ -1,0 +1,14 @@
+<div class="mb-3 d-flex flex-column" style="text-align: left;">
+    <label for="userName" class="form-label font-weight-bold">{{label}}</label>
+    <input [formControl]="control" [type]="type" class="form-control" name="email" id="userName"
+        [class.is-invalid]="control.errors && control.touched" [placeholder]="label" required />
+    <div class="invalid-feedback" *ngIf="control.hasError('minlength')">
+        Please enter your {{label}} with minimum length of {{control.errors?.['minlength'].requiredLength}} characters
+    </div>
+    <div class="invalid-feedback" *ngIf="ngControl.hasError('required')">
+        Please enter a {{label}}.
+    </div>
+    <div class="invalid-feedback" *ngIf="ngControl.hasError('isMatching')">
+        Your confirm password must match your password.
+    </div>
+</div>
