@@ -28,7 +28,7 @@ jobs:
       - name: Install deps and build angular app
         run: |
           cd dating-app
-          npm install
+          npm install --force
           ng build
 
       - name: Set up .NET Core
