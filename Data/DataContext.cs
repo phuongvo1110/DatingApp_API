@@ -21,7 +21,7 @@ namespace DatingApp.Data
             builder.Entity<UserLike>().HasKey(k => new { k.SourceUserId, k.TargetUserId });
 
             builder.Entity<UserLike>().HasOne(s => s.SourceUser).WithMany(l => l.LikedUsers).HasForeignKey(s => s.SourceUserId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<UserLike>().HasOne(s => s.TargetUser).WithMany(l => l.LikedByUsers).HasForeignKey(s => s.TargetUserId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<UserLike>().HasOne(s => s.TargetUser).WithMany(l => l.LikedByUsers).HasForeignKey(s => s.TargetUserId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Message>().HasOne(s => s.Sender).WithMany(x => x.MessagesSent).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Message>().HasOne(s => s.Recipient).WithMany(x => x.MessageReceived).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
